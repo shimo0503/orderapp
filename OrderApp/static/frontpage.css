@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+header,footer{background-color: brown;}
+
+.button{
+    width: 50%;
+    height: 100px;
+    display: inline-block;
+    border-radius: 5%;
+    font-size: 18pt;
+    text-align: center;
+    cursor: center;
+    padding: 24px 24px;
+    background: #000066;
+    color: #ffffff;
+    line-height: 3em;
+    transition: 3s;
+    box-shadow: 6px 6px 3px #666666;
+    border: 2px solid #000066;
+}
+.button:hover{
+    box-shadow: none;
+    color: #000066;
+    background: #ffffff;
+}
+.row{
+    display: flex;
+}
+
+.restregister_error{
+    color:red;
+}

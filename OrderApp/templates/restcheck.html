@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for product in products %}
+        <div>{{ product.name }}</div>
+        <div>{{ product.price }}</div>
+        <div>{{ product.order_num }}</div>
+        <div>{{ product.rest }}</div>
+        <hr>
+    {% endfor %}
+{% endblock content %}
