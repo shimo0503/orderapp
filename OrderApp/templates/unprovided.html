@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        {% for customer_product in customer_products %}
+        <p>テーブル番号:{{ customer_product.customer.table_number}}</p>
+        <p>{{ customer_product.product.name}}</p>
+        <p>{{ customer_product.quantity}}個</p>
+        <hr>
+        {% endfor %}
+    </div>
+{% endblock content %}

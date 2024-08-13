@@ -1,6 +1,5 @@
 from django import forms
-from OrderApp.models import Products
-from OrderApp.models import Customer
+from OrderApp.models import Customer, Products, CustomerProduct
 
 class AppendProductForm(forms.ModelForm):
     class Meta:
@@ -16,9 +15,47 @@ class RegisterRestForm(forms.ModelForm):
         fields = ["name","rest"]
         labels = {"name": "名前", "rest": "残数"}
 
-class OrderForm(forms.ModelForm):
+class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ["table_number","products"]
-        labels = {"table_number": "卓番",
-                  "products": "商品"}
+        fields = ['table_number']
+        labels = {
+            'table_number': 'テーブル番号',
+        }
+        widgets = {
+            'table_number': forms.NumberInput(attrs={'placeholder': 'テーブル番号'}),
+        }
+
+class CustomerProductForm(forms.ModelForm):
+    class Meta:
+        model = CustomerProduct
+        fields = ['customer', 'product', 'quantity']
+        labels = {
+            'customer': '顧客',
+            'product': '商品',
+            'quantity': '数量',
+        }
+        widgets = {
+            'customer': forms.Select(),
+            'product': forms.Select(),
+            'quantity': forms.NumberInput(attrs={'min': 0}),
+        }
+
+class OrderForm(forms.Form):
+    customer_table_number = forms.IntegerField(
+        label='テーブル番号',
+        min_value=1,
+        widget=forms.NumberInput(attrs={'placeholder': 'テーブル番号'})
+    )
+    
+    def __init__(self, *args, **kwargs):
+        super(OrderForm, self).__init__(*args, **kwargs)
+        products = Products.objects.all()
+        for product in products:
+            self.fields[f'quantity_{product.id}'] = forms.IntegerField(
+                label=product.name,
+                initial=0,
+                min_value=0,
+                required=False,
+                widget=forms.NumberInput(attrs={'placeholder': '数量'})
+            )

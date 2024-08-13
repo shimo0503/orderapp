@@ -2,13 +2,13 @@
 {% block content %}
     <br>
     <div class = "row">
-        <a href="" class = "button">新規注文</a>
-        <a href="" class = "button">追加注文</a>
+        <a href={% url 'neworder' %} class = "button">新規注文</a>
+        <a href={% url 'addorder' %} class = "button">追加注文</a>
     </div>
     <br>
     <div class = "row">
         <a href="" class = "button">会計</a>
-        <a href="" class = "button">未提供商品</a>
+        <a href={% url 'unprovided' %} class = "button">未提供商品</a>
     </div>
     <br>
     <div class = "row">

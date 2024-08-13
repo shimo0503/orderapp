@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from OrderApp.views import frontpage, append_menu, restcheck, restregister
+from OrderApp.views import frontpage, append_menu, restcheck, restregister, create_order, addorder, unprovided
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',frontpage, name = 'front'),
     path('restcheck/',restcheck, name = 'restcheck'),
     path('append_menu/',append_menu, name = 'append_menu'),
-    path('restregister/',restregister, name = 'restregister')
+    path('restregister/',restregister, name = 'restregister'),
+    path('neworder/', create_order, name = 'neworder'),
+    path('addorder/', addorder, name = 'addorder'),
+    path('unprovided/', unprovided, name = 'unprovided'),
 ]
