@@ -7,13 +7,13 @@
     </div>
     <br>
     <div class = "row">
-        <a href="" class = "button">会計</a>
+        <a href={% url 'pay' %} class = "button">会計</a>
         <a href={% url 'unprovided' %} class = "button">未提供商品</a>
     </div>
     <br>
     <div class = "row">
         <a href="" class = "button">未収オーダー</a>
-        <a href="" class = "button">会計済み</a>
+        <a href={% url 'payreverse' %} class = "button">会計済み</a>
     </div>
     <br>
     <div class = "row">

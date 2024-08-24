@@ -59,3 +59,12 @@ class OrderForm(forms.Form):
                 required=False,
                 widget=forms.NumberInput(attrs={'placeholder': '数量'})
             )
+
+class PayForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['paycheck']
+        labels = {'paycheck':'会計'}
+        widgets = {
+            'paycheck': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for customer in customers %}
+        {% if customer.paycheck %}
+            <h2>テーブル番号:{{ customer.table_number }}</h2>
+            <div>金額:{{ customer.price }}</div>
+            <a href={% url 'payreverseflow' customer.pk %}>未会計に戻す</a>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

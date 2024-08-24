@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from OrderApp.views import frontpage, append_menu, restcheck, restregister, create_order, addorder, unprovided
+from OrderApp.views import frontpage, append_menu, restcheck, restregister, create_order, addorder, unprovided, pay, payflow, payreverse, payreverseflow
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,8 @@ urlpatterns = [
     path('neworder/', create_order, name = 'neworder'),
     path('addorder/', addorder, name = 'addorder'),
     path('unprovided/', unprovided, name = 'unprovided'),
+    path('pay/', pay, name = 'pay'),
+    path('payflow/<int:pk>', payflow, name = 'payflow'),
+    path('payreverse/', payreverse, name = 'payreverse'),
+    path('payreverseflow/<int:pk>', payreverseflow, name = 'payreverseflow'),
 ]

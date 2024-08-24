@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from OrderApp.forms import AppendProductForm, RegisterRestForm, OrderForm
+from OrderApp.forms import AppendProductForm, RegisterRestForm, OrderForm, PayForm
 from OrderApp.models import Products, CustomerProduct, Customer
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -120,3 +120,23 @@ def addorder(request):
 def unprovided(request):
     customer_products = CustomerProduct.objects.all()
     return render(request, 'unprovided.html', {'customer_products': customer_products})
+
+def pay(request):
+    customers = Customer.objects.all()
+    return render(request, 'pay.html', {'customers': customers})
+
+def payflow(request, pk):
+    customer = Customer.objects.get(pk=pk)
+    customer.paycheck = True
+    customer.save()
+    return redirect('pay')
+
+def payreverse(request):
+    customers = Customer.objects.all()
+    return render(request, 'payreverse.html', {'customers': customers})
+
+def payreverseflow(request, pk):
+    customer = Customer.objects.get(pk=pk)
+    customer.paycheck = False
+    customer.save()
+    return redirect('payreverse')
