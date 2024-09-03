@@ -14,9 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from OrderApp.views import frontpage, append_menu, restcheck, restregister, create_order, addorder, unprovided, pay, payflow, payreverse, payreverseflow
+from OrderApp.views import frontpage, append_menu, restcheck, restregister, create_order, addorder, provided, unprovided,provideflow, pay, payflow, payreverse, payreverseflow, restore_csv, minus_order, csv_install
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,9 +28,14 @@ urlpatterns = [
     path('restregister/',restregister, name = 'restregister'),
     path('neworder/', create_order, name = 'neworder'),
     path('addorder/', addorder, name = 'addorder'),
+    path('provided/', provided, name = 'provided'),
     path('unprovided/', unprovided, name = 'unprovided'),
+    path('provideflow/<int:pk>', provideflow, name = 'provideflow'),
     path('pay/', pay, name = 'pay'),
     path('payflow/<int:pk>', payflow, name = 'payflow'),
     path('payreverse/', payreverse, name = 'payreverse'),
     path('payreverseflow/<int:pk>', payreverseflow, name = 'payreverseflow'),
-]
+    path('restore/', restore_csv, name = 'restore_csv'),
+    path('minus_order/', minus_order, name = 'minus_order'),
+    path('csv_install/<str:filename>', csv_install, name='csv_install'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

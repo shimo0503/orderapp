@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -25,8 +29,8 @@ SECRET_KEY = 'django-insecure-b%9ye88@n-qay9p)czn()=aw9@92q8my757bw2@^_%^3vstpu!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#home->'192.168.3.15'
-ALLOWED_HOSTS = []
+#home->'192.168.3.14'
+ALLOWED_HOSTS = ['192.168.3.14']
 
 
 # Application definition
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'OrderApp',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

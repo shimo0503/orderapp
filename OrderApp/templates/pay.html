@@ -1,10 +1,26 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pay.css' %}">
+    <title>注文アプリ</title>
+</head>
+<body>
+    <header class = "header">
+        <a href={% url 'front' %}>home</a>
+    </header>
+    <br>
     {% for customer in customers %}
+        <div class="customer">
         {% if not customer.paycheck %}
-            <h2>テーブル番号:{{ customer.table_number }}</h2>
-            <div>金額:{{ customer.price }}</div>
+            <h2 class="table">テーブル番号:{{ customer.table_number }}</h2>
+            <div class="price">金額:{{ customer.price }}</div>
             <a href={% url 'payflow' customer.pk %}>会計</a>
         {% endif %}
+        </div>
     {% endfor %}
-{% endblock content %}
+</body>
+</html>

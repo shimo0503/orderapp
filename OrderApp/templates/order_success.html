@@ -1,5 +1,18 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <h1>注文に成功しました</h1>
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'frontpage.css' %}">
+    <title>注文アプリ</title>
+</head>
+<body>
+    <header class = "header">
+        <a href={% url 'front' %}>home</a>
+    </header>
+    <br>
+    <h1 style="text-align: center;">注文に成功しました</h1>
+</body>
+</html>

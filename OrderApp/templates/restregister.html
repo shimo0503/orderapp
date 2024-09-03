@@ -1,13 +1,32 @@
-{% extends 'base.html' %}
-{% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        <p>{{ form.as_p }}</p>
-        {% if error %}
-            <div class = restregister_error>
-                {{ error }}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'restregister.css' %}">
+    <title>注文アプリ</title>
+</head>
+<body>
+    <header class = "header">
+        <a href={% url 'front' %}>home</a>
+    </header>
+    <br>
+    <div class="container">
+        <h1 class = "head">残数登録</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form">
+                名前：{{ form.name|add_class:'name_form' }}
+                残数：{{ form.rest|add_class:'rest_form' }}
             </div>
-        {% endif %}
-        <button type="submit">送信</button>
-    </form>
-{% endblock content %}
+            <button type="submit">送信</button>
+            {% if error %}
+                <h2>{{ error }}</h2>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
+    

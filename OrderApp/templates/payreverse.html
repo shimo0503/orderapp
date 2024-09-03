@@ -1,10 +1,30 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'payreverse.css' %}">
+    <title>注文アプリ</title>
+</head>
+<body>
+    <header class = "header">
+        <a href={% url 'front' %}>home</a>
+    </header>
+    <br>
     {% for customer in customers %}
+        <div class="customer">
         {% if customer.paycheck %}
-            <h2>テーブル番号:{{ customer.table_number }}</h2>
-            <div>金額:{{ customer.price }}</div>
+            <h2 class="table">テーブル番号:{{ customer.table_number }}</h2>
+            <div class="price">金額:{{ customer.price }}</div>
             <a href={% url 'payreverseflow' customer.pk %}>未会計に戻す</a>
         {% endif %}
+        </div>
     {% endfor %}
-{% endblock content %}
+    <hr>
+    <br>
+    <h2>エクセルに出力</h2>
+    <a href={% url 'restore_csv' %}>保存</a>
+</body>
+</html>

@@ -1,8 +1,28 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'append_menu.css' %}">
+    <title>注文アプリ</title>
+</head>
+<body>
+<header class = "header">
+    <a href={% url 'front' %}>home</a>
+</header>
+<br>
+<div class = "container">
+    <h1 class = "head">メニュー追加</h1>
     <form method="POST">
         {% csrf_token %}
-        <p>{{ form.as_p }}</p>
-        <button type="submit">送信</button>
+        <div class="form">
+            名前：{{ form.name|add_class:'name_form' }}
+            値段：{{ form.price|add_class:'price_form' }}
+        </div>
+        <button type="submit" class = "button">送信</button>
     </form>
-{% endblock content %}
+</div>
+</body>
+</html>

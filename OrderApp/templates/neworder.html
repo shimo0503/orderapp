@@ -1,8 +1,27 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'neworder.css' %}">
+    <title>注文アプリ</title>
+</head>
+<body>
+    <header class = "header">
+        <a href={% url 'front' %}>home</a>
+    </header>
+    <br>
     <form method="POST">
         {% csrf_token %}
-        <p>{{ form.as_p }}</p>
+        <div class="orderform">
+            {{ form.as_p }}
+        </div>
         <button type="submit">送信</button>
     </form>
-{% endblock content %}
+    {% if error %}
+        <h2>{{ error }}</h2>
+    {% endif %}
+</body>
+</html>

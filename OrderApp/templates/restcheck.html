@@ -1,11 +1,25 @@
-{% extends 'base.html' %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'restcheck.css' %}">
+    <title>注文アプリ</title>
+</head>
+<body>
+    <header class = "header">
+        <a href={% url 'front' %}>home</a>
+    </header>
+    <br>
     {% for product in products %}
-        <div>{{ product.name }}</div>
-        <div>{{ product.price }}</div>
-        <div>{{ product.order_num }}</div>
-        <div>{{ product.rest }}</div>
+    <div class="container">
+        <div class="name">{{ product.name }}</div>
+        <div class="price">金額:{{ product.price }}</div>
+        <div class="rest">残数:{{ product.rest }}</div>
         <hr>
+    </div>
     {% endfor %}
-{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.header a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 800px;
+    margin: 80px auto 20px; /* 上部にスペースを追加して、ヘッダーと内容を分離 */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+.container:last-child {
+    margin-bottom: 0;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.rest {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .name {
+        font-size: 20px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .rest {
+        font-size: 16px;
+    }
+}

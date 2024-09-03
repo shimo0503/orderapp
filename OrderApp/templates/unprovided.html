@@ -1,12 +1,30 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <div>
-        {% for customer_product in customer_products %}
-        <p>テーブル番号:{{ customer_product.customer.table_number}}</p>
-        <p>{{ customer_product.product.name}}</p>
-        <p>{{ customer_product.quantity}}個</p>
-        <hr>
-        {% endfor %}
-    </div>
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    {% load widget_tweaks %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'unprovided.css' %}">
+    <title>注文アプリ</title>
+</head>
+<body>
+    <header class = "header">
+        <a href={% url 'front' %}>home</a>
+    </header>
+    <br>
+    {% if customer_products %}
+        <div>
+            {% for customer_product in customer_products %}
+            <p>テーブル番号:{{ customer_product.customer.table_number}}</p>
+            <p>{{ customer_product.product.name}}</p>
+            <p>{{ customer_product.quantity}}個</p>
+            <a href={% url 'provideflow' customer_product.pk %}>提供</a>
+            <hr>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>提供していない商品はありません</h2>
+    {% endif %}
+</body>
+</html>

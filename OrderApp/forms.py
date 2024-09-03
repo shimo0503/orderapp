@@ -4,9 +4,8 @@ from OrderApp.models import Customer, Products, CustomerProduct
 class AppendProductForm(forms.ModelForm):
     class Meta:
         model = Products
-        fields = ["name","code","price"]
+        fields = ["name","price"]
         labels = {"name":" 商品名",
-                  "code": "商品コード",
                   "price": "価格"}
 
 class RegisterRestForm(forms.ModelForm):
@@ -68,3 +67,9 @@ class PayForm(forms.ModelForm):
         widgets = {
             'paycheck': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+
+class ProvideForm(forms.ModelForm):
+    class Meta:
+        model = CustomerProduct
+        fields = ['provided']
+        labels = {'provided':'提供'}

@@ -12,7 +12,7 @@
     </div>
     <br>
     <div class = "row">
-        <a href="" class = "button">未収オーダー</a>
+        <a href={% url 'provided' %} class = "button">提供済み商品</a>
         <a href={% url 'payreverse' %} class = "button">会計済み</a>
     </div>
     <br>
@@ -23,7 +23,13 @@
     <br>
     <div class = "row">
         <a href={% url 'append_menu' %} class = "button">商品登録</a>
-        <a href="" class = "button">その他</a>
+        <a href={% url 'minus_order' %} class = "button">マイナスオーダー</a>
     </div>
+    <br>
+    <div class = "row">
+        <a href={% url 'csv_install' 'sales.csv' %} class = "button">エクセル保存</a>
+        <a href="" class = "button">エクセル初期化</a>
+    </div>
+    <br>
     <br>
 {% endblock content %}
