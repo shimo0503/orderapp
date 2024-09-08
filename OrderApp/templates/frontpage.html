@@ -18,7 +18,7 @@
     <br>
     <div class = "row">
         <a href={% url 'restregister' %} class = "button">残数登録</a>
-        <a href={% url 'restcheck' %} class = "button">残数確認</a>
+        <a href={% url 'restcheck' %} class = "button">メニュー</a>
     </div>
     <br>
     <div class = "row">
@@ -27,9 +27,15 @@
     </div>
     <br>
     <div class = "row">
-        <a href={% url 'csv_install' 'sales.csv' %} class = "button">エクセル保存</a>
-        <a href="" class = "button">エクセル初期化</a>
+        <a href={% url 'sales' %} class = "button">売上</a>
+        <a href="" class = "button">その他</a>
     </div>
     <br>
     <br>
+    <footer>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">ログアウト</button>
+        </form>        
+    </footer>
 {% endblock content %}

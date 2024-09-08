@@ -18,6 +18,7 @@
         <div class="name">{{ product.name }}</div>
         <div class="price">金額:{{ product.price }}</div>
         <div class="rest">残数:{{ product.rest }}</div>
+        <a href={% url 'menu_delete' product.pk %}>削除</a>
         <hr>
     </div>
     {% endfor %}

@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+table {
+    width: 80%; /* テーブルの幅を調整 */
+    margin: 20px auto; /* 上下にマージンを追加し、左右中央に配置 */
+    border-collapse: collapse; /* セルの境界線を重ねない */
+}
+
+/* テーブルのボーダー */
+table, th, td {
+    border: 1px solid #ddd; /* 薄いグレーのボーダー */
+}
+
+/* テーブルヘッダーのスタイル */
+th {
+    background-color: #f4f4f4; /* ヘッダーの背景色 */
+    color: #333; /* ヘッダーの文字色 */
+    padding: 12px; /* 内側のスペース */
+    text-align: center; /* テキストを中央揃え */
+}
+
+/* テーブルデータセルのスタイル */
+td {
+    padding: 10px; /* 内側のスペース */
+    text-align: center; /* テキストを中央揃え */
+}
+
+/* 行ごとの背景色を交互に変更 */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* 偶数行の背景色 */
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff; /* 奇数行の背景色 */
+}

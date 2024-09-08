@@ -4,14 +4,18 @@ from OrderApp.models import Products, CustomerProduct, Customer
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 import os
 import csv
 
 #メインページを表示
+@login_required
 def frontpage(request):
     return render(request, "frontpage.html")
 
 #メニュー追加画面
+@login_required
 def append_menu(request):
     #フォームの表示
     if request.method == "GET":
@@ -28,11 +32,13 @@ def append_menu(request):
             return render(request,"append_menu.html", {"form": form})
 
 #残数確認
+@login_required
 def restcheck(request):
     products = Products.objects.all()
     return render(request,"restcheck.html",{"products": products})
 
 #残数登録
+@login_required
 def restregister(request):
     if request.method == "GET":
         form = RegisterRestForm()
@@ -51,7 +57,8 @@ def restregister(request):
                 return render(request,"restregister.html",{"form": form, "error": "その名前の商品は見つかりません"})
         else:
             return render(request,"restregister.html", {"form": form})
-    
+
+@login_required
 def create_order(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -94,6 +101,7 @@ def create_order(request):
         
     return render(request, 'neworder.html', {'form': form})
 
+@login_required
 def addorder(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -138,6 +146,7 @@ def addorder(request):
         
     return render(request, 'neworder.html', {'form': form})
 
+@login_required
 def provided(request):
     try:
         customer_products = CustomerProduct.objects.filter(provided=True)
@@ -145,6 +154,7 @@ def provided(request):
         return render(request, 'unprovided.html')
     return render(request, 'unprovided.html', {'customer_products': customer_products})
 
+@login_required
 def unprovided(request):
     try:
         customer_products = CustomerProduct.objects.filter(provided=False).order_by('made_at')
@@ -152,6 +162,7 @@ def unprovided(request):
         return render(request, 'unprovided.html')
     return render(request, 'unprovided.html', {'customer_products': customer_products})
 
+@login_required
 def provideflow(request, pk):
     customer_product = CustomerProduct.objects.get(pk=pk)
     if customer_product.provided:
@@ -163,26 +174,31 @@ def provideflow(request, pk):
         customer_product.save()
         return redirect('unprovided')
 
+@login_required
 def pay(request):
     customers = Customer.objects.all()
     return render(request, 'pay.html', {'customers': customers})
 
+@login_required
 def payflow(request, pk):
     customer = Customer.objects.get(pk=pk)
     customer.paycheck = True
     customer.save()
     return redirect('pay')
 
+@login_required
 def payreverse(request):
     customers = Customer.objects.all()
     return render(request, 'payreverse.html', {'customers': customers})
 
+@login_required
 def payreverseflow(request, pk):
     customer = Customer.objects.get(pk=pk)
     customer.paycheck = False
     customer.save()
     return redirect('payreverse')
 
+@login_required
 def restore_csv(request):
     customers = Customer.objects.all()
     file = open('OrderApp/media/sales.csv','a',newline='')
@@ -195,6 +211,7 @@ def restore_csv(request):
     file.close()
     return redirect('front')
 
+@login_required
 def minus_order(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -233,13 +250,15 @@ def minus_order(request):
         
     return render(request, 'neworder.html', {'form': form})
 
-def csv_install(request, filename):
-    file_path = os.path.join('media/sales.csv', filename)
-    
-    if not os.path.exists(file_path):
-        return HttpResponse("File not found.", status=404)
+@login_required
+def menu_delete(request, pk):
+    product = Products.objects.get(pk=pk)
+    product.delete()
+    return redirect('restcheck')
 
-    with open(file_path, 'rb') as f:
-        response = HttpResponse(f.read(), content_type='text/csv')
-        response['Content-Disposition'] = f'attachment; filename="{filename}"'
-        return response
+@login_required
+def sales(request):
+    with open('OrderApp/media/sales.csv', mode='r', encoding='utf-8') as file:
+        sales = csv.reader(file)
+        return render(request, 'sales.html', {'sales': sales})
+    

@@ -18,7 +18,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from OrderApp.views import frontpage, append_menu, restcheck, restregister, create_order, addorder, provided, unprovided,provideflow, pay, payflow, payreverse, payreverseflow, restore_csv, minus_order, csv_install
+from OrderApp.views import frontpage, append_menu, restcheck, restregister, create_order, addorder, provided, unprovided,provideflow, pay, payflow, payreverse, payreverseflow, restore_csv, minus_order, menu_delete, sales
+from accounts.forms import CustomLoginForm
+from accounts.views import custom_login
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,5 +41,8 @@ urlpatterns = [
     path('payreverseflow/<int:pk>', payreverseflow, name = 'payreverseflow'),
     path('restore/', restore_csv, name = 'restore_csv'),
     path('minus_order/', minus_order, name = 'minus_order'),
-    path('csv_install/<str:filename>', csv_install, name='csv_install'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('menu_delete/<int:pk>',menu_delete, name = 'menu_delete'),
+    path('sales/',sales, name = 'sales'),
+    path('login/', custom_login, name='login'),
+    path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
+]
