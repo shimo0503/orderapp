@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-b%9ye88@n-qay9p)czn()=aw9@92q8my757bw2@^_%^3vstpu!
 DEBUG = True
 
 #home->'192.168.3.6'
-ALLOWED_HOSTS = ['192.168.3.6']
+ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 
