@@ -20,3 +20,7 @@ class CustomerProduct(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
     provided = models.BooleanField(default=False)
+
+class Sales(models.Model):
+    date = models.DateTimeField(auto_now=True)
+    price = models.IntegerField(null=False)

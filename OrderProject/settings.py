@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'OrderApp',
     'widget_tweaks',
     "accounts",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [

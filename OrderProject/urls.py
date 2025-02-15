@@ -17,32 +17,23 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
-from OrderApp.views import frontpage, append_menu, restcheck, restregister, create_order, addorder, provided, unprovided,provideflow, pay, payflow, payreverse, payreverseflow, restore_csv, minus_order, menu_delete, sales
+from django.urls import path, include
+from OrderApp.views import ProductAPIView, RestRegister, NewMenu, NewOrder, AddOrder, CustomerAPIView, DeleteMenu, Provide, Pay
 from accounts.forms import CustomLoginForm
 from accounts.views import custom_login
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',frontpage, name = 'front'),
-    path('restcheck/',restcheck, name = 'restcheck'),
-    path('append_menu/',append_menu, name = 'append_menu'),
-    path('restregister/',restregister, name = 'restregister'),
-    path('neworder/', create_order, name = 'neworder'),
-    path('addorder/', addorder, name = 'addorder'),
-    path('provided/', provided, name = 'provided'),
-    path('unprovided/', unprovided, name = 'unprovided'),
-    path('provideflow/<int:pk>', provideflow, name = 'provideflow'),
-    path('pay/', pay, name = 'pay'),
-    path('payflow/<int:pk>', payflow, name = 'payflow'),
-    path('payreverse/', payreverse, name = 'payreverse'),
-    path('payreverseflow/<int:pk>', payreverseflow, name = 'payreverseflow'),
-    path('restore/', restore_csv, name = 'restore_csv'),
-    path('minus_order/', minus_order, name = 'minus_order'),
-    path('menu_delete/<int:pk>',menu_delete, name = 'menu_delete'),
-    path('sales/',sales, name = 'sales'),
-    path('login/', custom_login, name='login'),
-    path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
+    path('api/product', ProductAPIView.as_view(), name = 'prod'),
+    path('api/customer', CustomerAPIView.as_view(), name = 'customer'),
+    path('api/rest', RestRegister.as_view(), name='rest'),
+    path('api/Menu/new', NewMenu.as_view(), name = 'newmenu'),
+    path('api/Menu/delete', DeleteMenu.as_view(), name = 'deletemenu'),
+    path('api/order/new', NewOrder.as_view(), name = 'neworder'),
+    path('api/order/add', AddOrder.as_view(), name = 'neworder'),
+    path('api/provide', Provide.as_view(), name = 'provide'),
+    path('api/pay', Pay.as_view(), name = 'pay'),
 ]
