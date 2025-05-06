@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import os
 import csv
-from .serializer import ProductSerializer, CustomerSerializer, SaleSerializer
+from .serializer import ProductSerializer, CustomerSerializer, SaleSerializer, CustomerProductSerializer
 from rest_framework import viewsets
 
 from django.http import JsonResponse
@@ -55,6 +55,16 @@ class CustomerAPIView(APIView):
     def get(self, request):
         customers = Customer.objects.all()
         serializer = CustomerSerializer(customers, many=True)
+        return Response({
+            'status' : '200',
+            'data' : serializer.data
+        }, status = 200)
+
+# 注文した商品を表示
+class GetOrder(APIView):
+    def get(self, request):
+        orders = CustomerProduct.objects.all()
+        serializer = CustomerProductSerializer(orders, many=True)
         return Response({
             'status' : '200',
             'data' : serializer.data
@@ -278,7 +288,7 @@ class displaySales(APIView):
         sales = Sales.objects.get()
         serializer = SaleSerializer(Sales, mamy=True)
         return Response({
-            "status" : '200',
+            "status" : '201',
             "data" : sales.values()
         }, status = 201)          
 @login_required

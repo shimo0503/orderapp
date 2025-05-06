@@ -14,6 +14,13 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = ('made_at', 'table_number', 'paycheck', 'price', 'products')
 
+class CustomerProductSerializer(serializers.ModelSerializer):
+    customer = CustomerSerializer(read_only=True)
+    product = ProductSerializer(read_only=True)
+    class Meta:
+        model = CustomerProduct
+        fields = '__all__'
+
 class SaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sales
