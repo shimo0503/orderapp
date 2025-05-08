@@ -241,7 +241,7 @@ class AddOrder(APIView):
 class Provide(APIView):
     def post(self, request):
         try:
-            customer_product = CustomerProduct.objects.get(name = request.data.get('name'))
+            customer_product = CustomerProduct.objects.get(product__name = request.data.get('name'))
             if customer_product.provided:
                 customer_product.provided = False
                 customer_product.save()
