@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from OrderApp.views import ProductAPIView, RestRegister, NewMenu, NewOrder, AddOrder, CustomerAPIView, DeleteMenu, Provide, Pay, GetOrder
+from OrderApp.views import ProductAPIView, RestRegister, NewMenu, NewOrder, AddOrder, CustomerAPIView, DeleteMenu, Provide, Pay, GetOrder, displaySales
 from accounts.forms import CustomLoginForm
 from accounts.views import custom_login
 from django.contrib.auth import views as auth_views
@@ -37,4 +37,5 @@ urlpatterns = [
     path('api/provide', Provide.as_view(), name = 'provide'),
     path('api/order/get', GetOrder.as_view(), name = 'getOrder'),
     path('api/pay', Pay.as_view(), name = 'pay'),
+    path('api/sales', displaySales.as_view(), name = 'sales')
 ]

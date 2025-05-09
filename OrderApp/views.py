@@ -285,12 +285,13 @@ class Pay(APIView):
 # 売上表示
 class displaySales(APIView):
     def get(self, request):
-        sales = Sales.objects.get()
-        serializer = SaleSerializer(Sales, mamy=True)
+        sales = Sales.objects.all()
+        serializer = SaleSerializer(sales, many=True)
         return Response({
-            "status" : '201',
-            "data" : sales.values()
-        }, status = 201)          
+            "status": '200',
+            "data": serializer.data
+        }, status=200)
+
 @login_required
 def minus_order(request):
     if request.method == 'POST':

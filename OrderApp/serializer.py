@@ -24,4 +24,4 @@ class CustomerProductSerializer(serializers.ModelSerializer):
 class SaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sales
-        fields = ('date', 'price')
+        fields = '__all__'
