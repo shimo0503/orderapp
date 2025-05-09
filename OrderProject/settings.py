@@ -27,12 +27,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-b%9ye88@n-qay9p)czn()=aw9@92q8my757bw2@^_%^3vstpu!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
-ALLOWED_HOSTS = []
-
-AUTH_USER_MODEL = "accounts.CustomUser"
+ALLOWED_HOSTS = ['http://localhost:3000']
 
 
 # Application definition
@@ -46,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'OrderApp',
     'widget_tweaks',
-    "accounts",
     "rest_framework",
     'corsheaders'
 ]

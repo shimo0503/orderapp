@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from OrderApp.forms import AppendProductForm, RegisterRestForm, OrderForm, PayForm, ProvideForm
 from OrderApp.models import Products, CustomerProduct, Customer, Sales
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
@@ -291,42 +290,3 @@ class displaySales(APIView):
             "status": '200',
             "data": serializer.data
         }, status=200)
-
-@login_required
-def minus_order(request):
-    if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            table_number = form.cleaned_data['customer_table_number']
-            
-            # または、すでにテーブル番号が存在するかどうかをチェックして、既存の顧客を取得
-            customer, created = Customer.objects.get_or_create(
-                table_number=table_number,
-                defaults={'paycheck': False, 'price': 0}
-            )
-            #追加注文で未注文卓にアクセスした場合
-            if created == True:
-                customer.delete()
-                form = OrderForm()
-                error = "未使用卓です。"
-                return render(request,"neworder.html", {'error': error, 'form': form})
-            else:
-                products = Products.objects.all()
-                for product in products:
-                    quantity = form.cleaned_data.get(f'quantity_{product.id}', 0)
-                    if quantity > 0:
-                        CustomerProduct.objects.create(
-                            customer=customer,
-                            product=product,
-                            quantity=-quantity
-                        )
-                        customer.price -= product.price * quantity
-                        product.rest += quantity
-                        product.save()
-                        customer.save()
-                        
-                return render(request, 'order_success.html')  # 成功した後のリダイレクト先
-    else:
-        form = OrderForm()
-        
-    return render(request, 'neworder.html', {'form': form})

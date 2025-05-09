@@ -19,8 +19,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from OrderApp.views import ProductAPIView, RestRegister, NewMenu, NewOrder, AddOrder, CustomerAPIView, DeleteMenu, Provide, Pay, GetOrder, displaySales
-from accounts.forms import CustomLoginForm
-from accounts.views import custom_login
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 
